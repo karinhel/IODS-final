@@ -1,0 +1,51 @@
+---
+title: "IODS-final"
+author: "Karin Helander"
+output:
+  html_document:
+    theme: cosmo
+    toc: true
+    toc_depth: 2
+    fig_caption: true
+    fig_width: 6
+    fig_height: 4
+    code_folding: hide
+---
+
+
+# Introduction
+
+The purpose of this final assignment is to analyze the tea consumption with R's own dataset "Tea" from package FactoMineR. The tutkimuskysymys is x. Because the data has many binary variables, we need to use logistic regression as analysis tool instead of the linear regression.
+
+In logistic regression ...
+
+
+# Structure of the 'Tea' data
+
+
+
+
+# Logistic regression analysis
+
+As explaned earlier, the data has been reduced to x variables for the logstic regression analysis purpose. The data wranling can be seen here; .
+
+
+*analysis table
+
+*measures of fit
+
+*testing?
+
+*new model?
+
+*ROC curve
+
+
+
+
+
+
+
+
+
+
