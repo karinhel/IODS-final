@@ -4,14 +4,54 @@
 
 # Data wranling
 # Karin Helander
-# Date: 25.02.2017
+# karin.a.helander@helsinki.fi
+# Date: 07.03.2017
 
-# Let's wrangle the previously introduced 'Tea' data from the package FactoMineR.
-# After the wranling is finished, the data will be used for logistic regression analysis
 
+# We are going to do a data wrangling for R's own dataset 'Tea' from the package FactoMineR.
+# After the wranling, the data will be used for logistic regression analysis purposes.
+
+
+# First opening the library and dataset
 
 library(FactoMineR)
 
 data("tea")
 
+# Structure of the data
+
+dim(tea)
 str(tea)
+
+# There are 300 observations of 36 variables, which consider tea drinking habits.
+# We now choose to take a subset of the data,
+#       because our analysis does not necessarily need all of the variables.
+
+
+library(dplyr)
+
+# Variables for the new data (sub)set
+
+keep <- c("sex", "age_Q", "SPC", "frequency", "how", "price", "Tea", "relaxing")
+
+# The data will be called 'tea_log';
+
+tea_log <- select(tea, one_of(keep))
+
+# And the stucture shows that the subset is correctly done :)
+
+str(tea_log)
+
+# Saving the data
+
+write.csv2(tea_log, file="tea")
+
+
+
+#model
+choice <- glm(Tea ~ age_Q + price, data=tea, family = "binomial")
+
+summary(choice)
+
+
+

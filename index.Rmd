@@ -1,9 +1,10 @@
 ---
 title: "IODS-final"
-author: "Karin Helander"
+author: "Karin Helander, karin.a.helander@helsinki.fi"
+date: "March 8, 2017"
 output:
   html_document:
-    theme: cosmo
+    theme: lume
     toc: true
     toc_depth: 2
     fig_caption: true
@@ -15,26 +16,105 @@ output:
 
 # Introduction
 
-The purpose of this final assignment is to analyze the tea consumption with R's own dataset "Tea" from package FactoMineR. The tutkimuskysymys is x. Because the data has many binary variables, we need to use logistic regression as analysis tool instead of the linear regression.
+The purpose of this final assignment is to analyze tea consumption with R's own dataset "Tea" from the FactoMineR package. The research question follows; which factors are related to choosing a specific tea flavor? Soon we will notice, that because the data has many binary variables, we need to use the logistic regression in our tea-flavored analysis.
 
-In logistic regression ...
-
-
-# Structure of the 'Tea' data
+The logistic regression is a mostly used analytic tool when the resulting variable (in this case the tea flavor) is distributed as binary instead of a continuos distribution. Thuse, the linear regression model will not (and actually can not) produce any reliable results and so it needs a bit of updating. The logistic regression model is based on a logit distribution. The linearity comes from a logarithmic link function which converts the logit based function to a linear form. As we have estimated the model, the world of analysis by statistics and graphs is open for us.
 
 
+# Structure of the analysis dataset
+
+The original 'Tea' dataset has 300 observations of 36 variables. It has questions about how the individuals drink their tea, what are their product's perception and also some personal details. For the analysis we want to have a slightly smaller set of variables, so we take a subset called 'tea_log'. The data wranling for this can be seen [here](https://github.com/karinhel/IODS-final/blob/master/wranling_final.R).
+
+A good overview of the data is given by the next graph. We see that x.
+
+```{r}
+tea_log <- read.table(file= "tea", header= T, sep=";")
+
+
+library(ggplot2)
+library(GGally)
+
+
+
+
+```
+
+
+```{r, echo=F}
+# Multiple plot function
+#
+# ggplot objects can be passed in ..., or to plotlist (as a list of ggplot objects)
+# - cols:   Number of columns in layout
+# - layout: A matrix specifying the layout. If present, 'cols' is ignored.
+#
+# If the layout is something like matrix(c(1,2,3,3), nrow=2, byrow=TRUE),
+# then plot 1 will go in the upper left, 2 will go in the upper right, and
+# 3 will go all the way across the bottom.
+#
+multiplot <- function(..., plotlist=NULL, file, cols=1, layout=NULL) {
+  library(grid)
+
+  # Make a list from the ... arguments and plotlist
+  plots <- c(list(...), plotlist)
+
+  numPlots = length(plots)
+
+  # If layout is NULL, then use 'cols' to determine layout
+  if (is.null(layout)) {
+    # Make the panel
+    # ncol: Number of columns of plots
+    # nrow: Number of rows needed, calculated from # of cols
+    layout <- matrix(seq(1, cols * ceiling(numPlots/cols)),
+                    ncol = cols, nrow = ceiling(numPlots/cols))
+  }
+
+ if (numPlots==1) {
+    print(plots[[1]])
+
+  } else {
+    # Set up the page
+    grid.newpage()
+    pushViewport(viewport(layout = grid.layout(nrow(layout), ncol(layout))))
+
+    # Make each plot, in the correct location
+    for (i in 1:numPlots) {
+      # Get the i,j matrix positions of the regions that contain this subplot
+      matchidx <- as.data.frame(which(layout == i, arr.ind = TRUE))
+
+      print(plots[[i]], vp = viewport(layout.pos.row = matchidx$row,
+                                      layout.pos.col = matchidx$col))
+    }
+  }
+}
+```
 
 
 # Logistic regression analysis
 
-As explaned earlier, the data has been reduced to x variables for the logstic regression analysis purpose. The data wranling can be seen here; .
+As explaned earlier, the data has been reduced to x variables for the logistic regression analysis purpose.
 
 
 *analysis table
 
+```{r}
+#log <- glm(tea_log ~ relaxing, data=tea, family = "binomial")
+```
+
+
 *measures of fit
 
 *testing?
+```{r, message=FALSE}
+
+#OR <- coef(Log) %>% exp
+
+#CI <- confint(Log) %>% exp
+
+#cbind(OR, CI)
+
+```
+
+
 
 *new model?
 
