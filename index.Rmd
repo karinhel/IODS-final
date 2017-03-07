@@ -13,6 +13,11 @@ output:
     code_folding: hide
 ---
 
+```{r, include=FALSE}
+library(ggplot2)
+```
+
+
 
 # Introduction
 
@@ -21,11 +26,11 @@ The purpose of this final assignment is to analyze tea consumption with R's own 
 The logistic regression is a mostly used analytic tool when the resulting variable (in this case the tea flavor) is distributed as binary instead of a continuos distribution. Thuse, the linear regression model will not (and actually can not) produce any reliable results and so it needs a bit of updating. The logistic regression model is based on a logit distribution. The linearity comes from a logarithmic link function which converts the logit based function to a linear form. As we have estimated the model, the world of analysis by statistics and graphs is open for us.
 
 
-# Structure of the analysis dataset
+# Structure of the data
 
 The original 'Tea' dataset has 300 observations of 36 variables. It has questions about how the individuals drink their tea, what are their product's perception and also some personal details. For the analysis we want to have a slightly smaller set of variables, so we take a subset called 'tea_log'. The data wranling for this can be seen [here](https://github.com/karinhel/IODS-final/blob/master/wranling_final.R).
 
-A good overview of the data is given by the next graph. We see that x.
+A good overview of the data is given by the structure of the dataset as well as the following graph. 
 
 ```{r}
 tea_log <- read.table(file= "tea", header= T, sep=";")
