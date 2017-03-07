@@ -30,12 +30,7 @@ A good overview of the data is given by the next graph. We see that x.
 ```{r}
 tea_log <- read.table(file= "tea", header= T, sep=";")
 
-
-library(ggplot2)
-library(GGally)
-
-
-
+str(tea_log)
 
 ```
 
@@ -88,6 +83,23 @@ multiplot <- function(..., plotlist=NULL, file, cols=1, layout=NULL) {
 }
 ```
 
+```{r}
+library(RColorBrewer)
+
+g1 <- ggplot(tea_log, aes(x = age_Q, fill=Tea)) + geom_bar() + xlab("Age groups") + theme_bw() + theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 8))+ scale_fill_brewer(
+palette = "Set1") 
+
+g2 <- ggplot(tea_log, aes(x = frequency, fill=Tea)) + geom_bar() + xlab("Frequency of tea drinking") + theme_bw() + theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 8))+ scale_fill_brewer(
+palette = "Set1") 
+
+g3 <- ggplot(tea_log, aes(x = price, fill= Tea)) + geom_bar() + xlab("Price of tea") + theme_bw() + theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 8))+ scale_fill_brewer(
+palette = "Set1") 
+
+g4 <- ggplot(tea_log, aes(x = how, fill= Tea)) + geom_bar() + xlab("The form of tea") + theme_bw() + theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 8)) + scale_fill_brewer(
+palette = "Set1") 
+
+multiplot(g1, g2, g3, g4, cols=2)
+```
 
 # Logistic regression analysis
 

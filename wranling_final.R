@@ -48,10 +48,3 @@ write.csv2(tea_log, file="tea")
 
 
 
-#model
-choice <- glm(Tea ~ age_Q + price, data=tea, family = "binomial")
-
-summary(choice)
-
-
-
