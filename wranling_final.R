@@ -12,6 +12,9 @@
 # After the wranling, the data will be used for logistic regression analysis purposes.
 
 
+####################################################################################################
+##########################
+
 # First opening the library and dataset
 
 library(FactoMineR)
@@ -42,9 +45,25 @@ tea_log <- select(tea, one_of(keep))
 
 str(tea_log)
 
+# Next we will take a look at the 'Tea' variable, which is a three class variable of
+#   the tea flavor that the individual prefers. We want only to have options "black" and "green"
+#   instead of "black", "earl grey" and "green", since earl grey is also a black tea flavor.
+
+# A new logical vector will be 1 if 'Tea' is "black" or "earl grey", that is values 1 or 2
+#                          and 0 if 'Tea' is "green", the value 3.
+
+# Saving the Tea variable to a new variable name 
+tea_log$teaclass <- tea_log$Tea
+
+# Changing the levels into two-leveled factor 
+levels(tea_log$teaclass) <- c("black", "black", "green")
+
+# Checking whether it went the right way;
+str(tea_log$teaclass)
+
+
 # Saving the data
 
-write.csv2(tea_log, file="tea")
-
+write.csv(tea_log, file="tea")
 
 

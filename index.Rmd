@@ -23,22 +23,21 @@ library(ggplot2)
 
 The purpose of this final assignment is to analyze tea consumption with R's own dataset "Tea" from the FactoMineR package. The research question follows; which factors are related to choosing a specific tea flavor? Soon we will notice, that because the data has many binary variables, we need to use the logistic regression in our tea-flavored analysis.
 
-The logistic regression is a mostly used analytic tool when the resulting variable (in this case the tea flavor) is distributed as binary instead of a continuos distribution. Thuse, the linear regression model will not (and actually can not) produce any reliable results and so it needs a bit of updating. The logistic regression model is based on a logit distribution. The linearity comes from a logarithmic link function which converts the logit based function to a linear form. As we have estimated the model, the world of analysis by statistics and graphs is open for us.
+The logistic regression is a mostly used analytic tool when the resulting variable (in this case the tea flavor) is distributed as binary instead of a continuos distribution. Thuse, the linear regression model will not (and actually can not) produce any reliable results and so it needs a bit of updating. The logistic regression model is based on a logit distribution. The linearity is due to the logarithmic link function which converts the logit based function to a linear form. After we have estimated the model, the world of analysis by statistics and graphs is, to say, open.
 
 
 # Structure of the data
 
 The original 'Tea' dataset has 300 observations of 36 variables. It has questions about how the individuals drink their tea, what are their product's perception and also some personal details. For the analysis we want to have a slightly smaller set of variables, so we take a subset called 'tea_log'. The data wranling for this can be seen [here](https://github.com/karinhel/IODS-final/blob/master/wranling_final.R).
 
-A good overview of the data is given by the structure of the dataset as well as the following graph. 
+A good overview of the data is given by the structure of the dataset as well as the following graph. The data has 300 observations of 10 variables. In the data wranling we have also converted the variable 'Tea' to a so called dummy variable, where there are only two levels; "black" and "green". This 'teaclass' variable will be used for analysing differences between those how choose rather to drink black tea (where earl grey is now included) than green tea.
 
 ```{r}
-tea_log <- read.table(file= "tea", header= T, sep=";")
+tea_log <- read.table(file= "tea", header= T, sep=",")
 
 str(tea_log)
 
 ```
-
 
 ```{r, echo=F}
 # Multiple plot function
@@ -89,7 +88,7 @@ multiplot <- function(..., plotlist=NULL, file, cols=1, layout=NULL) {
 ```
 
 ```{r}
-library(RColorBrewer)
+library(RColorBrewer);library(ggplot2)
 
 g1 <- ggplot(tea_log, aes(x = age_Q, fill=Tea)) + geom_bar() + xlab("Age groups") + theme_bw() + theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 8))+ scale_fill_brewer(
 palette = "Set1") 
@@ -108,32 +107,40 @@ multiplot(g1, g2, g3, g4, cols=2)
 
 # Logistic regression analysis
 
-As explaned earlier, the data has been reduced to x variables for the logistic regression analysis purpose.
-
-
-*analysis table
+As explaned earlier, the data has been reduced to 10 variables for the logistic regression analysis purpose. We are now going to form a model which aims to explain the choice of tea flavor (black or green) by different kind of explanatory factors.
 
 ```{r}
-#log <- glm(tea_log ~ relaxing, data=tea, family = "binomial")
+logmodel <- glm(teaclass ~ age_Q + how + price + frequency, data=tea_log, family = "binomial")
+
+summary(logmodel)
 ```
 
 
-*measures of fit
+In the p-value column we see that most of the variables that are chosen for the model are not that significant. Only one class in the grouped age variable as well as a class in the price variable have some kind of significance. Due to this, we will reduce the model to only one explanatory variables, which will be the classified age variable.
 
-*testing?
+```{r}
+logmodel2 <- glm(teaclass ~ age_Q, data=tea_log, family = "binomial")
+
+summary(logmodel2)
+```
+
+
+
+After the model has been fit, we can calculate some odds ratios as well as confidence intervals for them.
+
 ```{r, message=FALSE}
+library(tidyr)
 
-#OR <- coef(Log) %>% exp
+OR <- coef(logmodel2) %>% exp
 
-#CI <- confint(Log) %>% exp
+CI <- confint(logmodel2) %>% exp
 
-#cbind(OR, CI)
+cbind(OR, CI)
 
 ```
 
 
 
-*new model?
 
 *ROC curve
 
