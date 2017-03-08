@@ -122,6 +122,7 @@ In the p-value column we see that most of the variables that are chosen for the 
 logmodel2 <- glm(teaclass ~ age_Q, data=tea_log, family = "binomial")
 
 summary(logmodel2)
+
 ```
 
 
@@ -151,16 +152,7 @@ cbind(OR, CI)
 ```
 
 
+Odds ratios are exponentials of the coefficient values. For example the "age_Q" variable's class 15-24yrs has an OR value of 0.201. Compared to the control group it is only 0.201 more likely to have a "true" value of teaclass than for the variable value. This means that when comparing the 15-24 age group, the alcohol consumption of the observed is over to times more likely to be higher.
 
-
-*ROC curve
-
-
-
-
-
-
-
-
-
+For any of the classes of the age variable in the model the OR values are not that high. Overall it seems that the choice of tea is not due to any factors included in the dataset and can be rather emotional than due to some real features, to say.
 

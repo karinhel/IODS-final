@@ -307,9 +307,9 @@ summary(logmodel2)</code></pre>
 <p>So, in the case of the fitted model we could say first of all, that the intercept tells again the level of the model. This works similarly for linear and logistic models. But then the real coefficients. Generally, when we have a multiple regression model, we interpret the coeff.s to be the change in the outcome variable when there is a one-unit change in the explanatory variable in question. Also important thing is, that when we do this, we assume the other variables to be constant, in other words we eliminate the effect of any other variable in the interpretation. Now in our logistic regression with a dichotomous outcome, the fitted model tells how much more likely is it to have the value 1 of “teaclass” than 0, when a single explanatory variable is in question and others are constant. So,</p>
 <ul>
 <li><p>when comparing the variable “age_Q”’s group 15-24yrs to the controll group, the odds for “teaclass” to be 1, which means odds for drinking black tea decreases by 1.60.</p></li>
-<li><p>when comparing the variable “age_Q”’s group 25-34yrs to the controll group, the odds for “teaclass” to be 1, which means odds for drinking black tea decreases only by 0.29.</p></li>
+<li><p>when comparing the variable “age_Q”’s group 25-34yrs to the controll group, the odds for drinking black tea decreases only by 0.29.</p></li>
 </ul>
-<p>and so on. It seems that younger and middle aged individuals drink less black tea than oldest and 25-34 year-old respondents. In general R is now showing us the value of coeff. when we compare it to a controll group that R has selected automatically. The real value of this coeff. is calculated: intercept - the value.</p>
+<p>and so on. It seems that younger and 35-44 aged individuals drink less black tea than the oldest and 25-34 year-old respondents. In general R is now showing us the value of coeff. when we compare it to a controll group that R has selected automatically. The real value of this coeff. is calculated: intercept - the value.</p>
 <p>After the model has been fit, we can calculate some odds ratios as well as confidence intervals for them.</p>
 <pre class="r"><code>library(tidyr)
 
@@ -324,7 +324,8 @@ cbind(OR, CI)</code></pre>
 ## age_Q25-34  0.7506053 0.26206811 2.2469337
 ## age_Q35-44  0.3590734 0.07262279 1.4097082
 ## age_Q45-59  0.7664835 0.25952571 2.3383880</code></pre>
-<p>*ROC curve</p>
+<p>Odds ratios are exponentials of the coefficient values. For example the “age_Q” variable’s class 15-24yrs has an OR value of 0.201. Compared to the control group it is only 0.201 more likely to have a “true” value of teaclass than for the variable value. This means that when comparing the 15-24 age group, the alcohol consumption of the observed is over to times more likely to be higher.</p>
+<p>For any of the classes of the age variable in the model the OR values are not that high. Overall it seems that the choice of tea is not due to any factors included in the dataset and can be rather emotional than due to some real features, to say.</p>
 </div>
 
 
