@@ -39,7 +39,7 @@ str(tea_log)
 
 ```
 
-```{r, echo=F}
+```{r}
 # Multiple plot function
 #
 # ggplot objects can be passed in ..., or to plotlist (as a list of ggplot objects)
@@ -124,6 +124,17 @@ logmodel2 <- glm(teaclass ~ age_Q, data=tea_log, family = "binomial")
 summary(logmodel2)
 ```
 
+
+Interpreting the estimated coefficients is a bit more complex than in linear regression, because now we have a binary outcome variable. The backroud for this is that, to make our model linear, we need to fix it with some calculation. The logistic regression model is based on a logistic function and thus the result variable values are actually values of the link function. That is basically the log of odds. This results in the fact that coefficient values can be interpret as odds ratios when we take the exponential of a single coefficient.
+
+So, in the case of the fitted model we could say first of all, that the intercept tells again the level of the model. This works similarly for linear and logistic models. But then the real coefficients. Generally, when we have a multiple regression model, we interpret the coeff.s to be the change in the outcome variable when there is a one-unit change in the explanatory variable in question. Also important thing is, that when we do this, we assume the other variables to be constant, in other words we eliminate the effect of any other variable in the interpretation.
+Now in our logistic regression with a dichotomous outcome, the fitted model tells how much more likely is it to have the value 1 of "teaclass" than 0, when a single explanatory variable is in question and others are constant. So,
+
+* when comparing the variable "age_Q"'s group 15-24yrs to the controll group, the odds for "teaclass" to be 1, which means odds for drinking black tea decreases by 1.60.
+
+* when comparing the variable "age_Q"'s group 25-34yrs to the controll group, the odds for drinking black tea decreases only by 0.29.
+
+and so on. It seems that younger and 35-44 aged individuals drink less black tea than the oldest and 25-34 year-old respondents. In general R is now showing us the value of coeff. when we compare it to a controll group that R has selected automatically. The real value of this coeff. is calculated: intercept - the value.
 
 
 After the model has been fit, we can calculate some odds ratios as well as confidence intervals for them.
